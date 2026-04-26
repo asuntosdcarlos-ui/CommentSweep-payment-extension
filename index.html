@@ -2,16 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Suscripción Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Pago</title>
+    <style>
+        /* Estilos para centrar el contenido */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Centrado horizontal */
+            align-items: center;     /* Centrado vertical */
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 </head>
 <body>
-    <h1>Activar Suscripción</h1>
-    <p>Haz clic abajo para suscribirte a nuestro servicio por $5 USD al mes.</p>
-    
-    <div id="paypal-button-container"></div>
 
-    <script>
-        // Aquí irá el script de PayPal SDK que te provee el panel de PayPal Developer
-    </script>
+    <div id="paypal-button-container">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="TU_ID_DE_BOTON_AQUI">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - La forma segura y fácil de pagar online!">
+        </form>
+    </div>
+
 </body>
 </html>
