@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CommentSweep | Elimina ruido de tus comentarios</title>
+    <title>CommentSweep Premium</title>
     <style>
         :root {
             --bg-body: #0d1117;
             --text-main: #f0f6fc;
+            --text-muted: #8b949e;
             --accent-red: #da3633;
             --border-color: #30363d;
         }
@@ -15,7 +16,7 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -25,24 +26,36 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px;
             padding: 40px;
             border: 1px solid var(--border-color);
             border-radius: 16px;
             background: #161b22;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        h1 { font-size: 2.2rem; margin-bottom: 10px; }
         .red { color: var(--accent-red); }
-        p { color: #8b949e; margin-bottom: 30px; font-size: 1.1rem; }
+        
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: var(--text-main);
+        }
+        
+        .price-tag span { color: var(--text-muted); font-size: 1rem; font-weight: normal; }
+
+        p { color: var(--text-muted); margin-bottom: 30px; font-size: 1rem; }
 
         .features {
             text-align: left;
             margin-bottom: 40px;
             list-style: none;
+            padding-left: 0;
         }
-        .features li { margin-bottom: 10px; }
-        .features li::before { content: "✓ "; color: var(--accent-red); font-weight: bold; }
+        .features li { margin-bottom: 12px; display: flex; align-items: center; }
+        .features li::before { content: "✓"; color: var(--accent-red); font-weight: bold; margin-right: 10px; }
 
         #paypal-button-container-P-6HB8436276585313TNHXHSTY {
             width: 100%;
@@ -55,13 +68,15 @@
 
     <div class="container">
         <h1>Comment<span class="red">Sweep</span></h1>
-        <p>Limpia tus comentarios de YouTube de forma masiva y automatizada. Recupera el control de tu comunidad.</p>
+        <p>Automate your YouTube moderation and reclaim your time.</p>
         
+        <div class="price-tag">$5 <span>/ month</span></div>
+
         <ul class="features">
-            <li>Escaneo automático de palabras prohibidas.</li>
-            <li>Gestión masiva de todos tus videos.</li>
-            <li>Ahorro de horas de moderación manual.</li>
-            <li>Soporte y actualizaciones constantes.</li>
+            <li>Bulk comment deletion based on keywords.</li>
+            <li>Scan all your videos automatically.</li>
+            <li>Eliminate spam and toxicity instantly.</li>
+            <li>Continuous updates and priority support.</li>
         </ul>
 
         <div id="paypal-button-container-P-6HB8436276585313TNHXHSTY"></div>
@@ -75,7 +90,7 @@
             return actions.subscription.create({ plan_id: 'P-6HB8436276585313TNHXHSTY' });
           },
           onApprove: function(data, actions) {
-            alert('¡Gracias por tu suscripción!');
+            alert('Subscription successful! Thank you for supporting CommentSweep.');
           }
       }).render('#paypal-button-container-P-6HB8436276585313TNHXHSTY');
     </script>
