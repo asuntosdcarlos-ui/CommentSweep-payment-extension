@@ -3,29 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Pago</title>
+    <title>CommentSweep | Elimina ruido de tus comentarios</title>
     <style>
-        /* Estilos para centrar el contenido */
-        body, html {
-            height: 100%;
+        :root {
+            --bg-body: #0d1117;
+            --text-main: #f0f6fc;
+            --accent-red: #da3633;
+            --border-color: #30363d;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: sans-serif;
             margin: 0;
             display: flex;
-            justify-content: center; /* Centrado horizontal */
-            align-items: center;     /* Centrado vertical */
-            background-color: #f4f4f9;
-            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: #161b22;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .red { color: var(--accent-red); }
+        p { color: #8b949e; margin-bottom: 30px; font-size: 1.1rem; }
+
+        .features {
+            text-align: left;
+            margin-bottom: 40px;
+            list-style: none;
+        }
+        .features li { margin-bottom: 10px; }
+        .features li::before { content: "✓ "; color: var(--accent-red); font-weight: bold; }
+
+        #paypal-button-container-P-6HB8436276585313TNHXHSTY {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
 
-    <div id="paypal-button-container">
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="TU_ID_DE_BOTON_AQUI">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - La forma segura y fácil de pagar online!">
-        </form>
+    <div class="container">
+        <h1>Comment<span class="red">Sweep</span></h1>
+        <p>Limpia tus comentarios de YouTube de forma masiva y automatizada. Recupera el control de tu comunidad.</p>
+        
+        <ul class="features">
+            <li>Escaneo automático de palabras prohibidas.</li>
+            <li>Gestión masiva de todos tus videos.</li>
+            <li>Ahorro de horas de moderación manual.</li>
+            <li>Soporte y actualizaciones constantes.</li>
+        </ul>
+
+        <div id="paypal-button-container-P-6HB8436276585313TNHXHSTY"></div>
     </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=Aemp6eLZ0j8fhEtMOsWIxNxCZS3cDK-FmkiBRBGsX5-Y82iTL9ER3mdEN2iX99FrKdp51oS259z-QpcM&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+    <script>
+      paypal.Buttons({
+          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+          createSubscription: function(data, actions) {
+            return actions.subscription.create({ plan_id: 'P-6HB8436276585313TNHXHSTY' });
+          },
+          onApprove: function(data, actions) {
+            alert('¡Gracias por tu suscripción!');
+          }
+      }).render('#paypal-button-container-P-6HB8436276585313TNHXHSTY');
+    </script>
 
 </body>
 </html>
