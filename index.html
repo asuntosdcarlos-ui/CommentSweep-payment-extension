@@ -33,14 +33,12 @@
         }
         h1 { font-size: 2.2rem; margin-bottom: 10px; }
         .red { color: var(--accent-red); }
-        
         .price-tag {
             font-size: 1.5rem;
             font-weight: bold;
             margin: 20px 0;
             color: var(--text-main);
         }
-        
         .price-tag span { color: var(--text-muted); font-size: 1rem; font-weight: normal; }
         p { color: var(--text-muted); margin-bottom: 30px; font-size: 1rem; }
         .features {
@@ -62,7 +60,6 @@
     <div class="container">
         <h1>Comment<span class="red">Sweep</span></h1>
         <p>Automate your YouTube moderation and reclaim your time.</p>
-        
         <div class="price-tag">$5 <span>/ month</span></div>
         <ul class="features">
             <li>Bulk comment deletion based on keywords.</li>
@@ -72,29 +69,80 @@
         </ul>
         <div id="paypal-button-container-P-6HB8436276585313TNHXHSTY"></div>
     </div>
+
+    <!-- Firebase SDK (module) — writes subscription to Firestore on payment -->
+    <script type="module">
+      import { initializeApp }               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getFirestore, doc, setDoc }  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey:            "AIzaSyA3nLIZKjOwGUL8MTBl5SZAUfd0q1AeO9o",
+        authDomain:        "commentsweep-9b43d.firebaseapp.com",
+        projectId:         "commentsweep-9b43d",
+        storageBucket:     "commentsweep-9b43d.firebasestorage.app",
+        messagingSenderId: "344472417970",
+        appId:             "1:344472417970:web:07253bdf09d589b6c07bab",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db  = getFirestore(app);
+
+      // Read user_id from URL — the extension passes this automatically
+      const userId = new URLSearchParams(window.location.search).get("user_id") || "";
+
+      // Expose globally so the PayPal script (non-module) can call it
+      window._writeSubscription = async function(subscriptionId) {
+        if (!userId) return;
+        try {
+          await setDoc(doc(db, "subscriptions", userId), {
+            active:         true,
+            status:         "ACTIVE",
+            subscriptionId: subscriptionId || "",
+            planId:         "P-6HB8436276585313TNHXHSTY",
+            userId:         userId,
+            createdAt:      Date.now(),
+          });
+        } catch (e) {
+          console.error("Firebase write error:", e);
+        }
+      };
+    </script>
+
     <script src="https://www.paypal.com/sdk/js?client-id=Aemp6eLZ0j8fhEtMOsWIxNxCZS3cDK-FmkiBRBGsX5-Y82iTL9ER3mdEN2iX99FrKdp51oS259z-QpcM&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
     <script>
+      var userId = new URLSearchParams(window.location.search).get("user_id") || "";
+
       paypal.Buttons({
           style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
+
           createSubscription: function(data, actions) {
-            return actions.subscription.create({ plan_id: 'P-6HB8436276585313TNHXHSTY' });
+            return actions.subscription.create({
+              plan_id:   'P-6HB8436276585313TNHXHSTY',
+              custom_id: userId,   // ← ties the PayPal payment to this user's channel ID
+            });
           },
+
           onApprove: function(data, actions) {
-            // ── Notify CommentSweep extension ──────────────────────────────
-            // Store in localStorage so the extension content script can detect it
             var subData = {
               subscriptionId: data.subscriptionID,
-              active: true,
-              date: Date.now(),
-              planId: 'P-6HB8436276585313TNHXHSTY'
+              planId:         'P-6HB8436276585313TNHXHSTY',
+              userId:         userId,
+              active:         true,
+              date:           Date.now(),
             };
+
+            // 1. Write to Firebase Firestore (primary — extension reads from here)
+            if (typeof window._writeSubscription === 'function') {
+              window._writeSubscription(data.subscriptionID);
+            }
+
+            // 2. Save to localStorage (content script polls this as backup)
             localStorage.setItem('commentsweep_subscription', JSON.stringify(subData));
 
-            // Also send postMessage so the content script catches it instantly
+            // 3. PostMessage (content script catches this instantly)
             window.postMessage({ type: 'COMMENTSWEEP_SUBSCRIBED', payload: subData }, '*');
 
-            // Original confirmation message
-            alert('Subscription successful! Thank you for supporting CommentSweep.');
+            alert('Subscription successful! Thank you for supporting CommentSweep.\n\nYou can close this tab and return to the extension — it will unlock automatically.');
           }
       }).render('#paypal-button-container-P-6HB8436276585313TNHXHSTY');
     </script>
