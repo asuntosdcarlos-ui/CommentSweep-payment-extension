@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CommentSweep – Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --text: #f0f6fc;
+      --muted: #8b949e;
+      --red: #da3633;
+      --border: #30363d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 2rem; margin-bottom: 6px; }
+    h1 span { color: var(--red); }
+    .subtitle { color: var(--muted); margin-bottom: 40px; font-size: 14px; }
+    h2 { font-size: 1.2rem; margin: 32px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    p  { color: var(--muted); margin-bottom: 12px; }
+    ul { color: var(--muted); padding-left: 20px; margin-bottom: 12px; }
+    ul li { margin-bottom: 6px; }
+    a  { color: var(--red); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Comment<span>Sweep</span></h1>
+    <p class="subtitle">Privacy Policy — Last updated: May 2026</p>
+
+    <h2>1. Overview</h2>
+    <p>
+      CommentSweep ("we", "our", or "the extension") is a browser extension that helps
+      YouTube creators find and delete unwanted comments from their channel using keyword filters.
+      We are committed to protecting your privacy and being transparent about the data we use.
+    </p>
+
+    <h2>2. Data We Collect</h2>
+    <p>We collect the minimum data necessary to provide the service:</p>
+    <ul>
+      <li><strong>YouTube Channel ID:</strong> Used as a unique identifier to verify your subscription status. Stored in Firebase Firestore.</li>
+      <li><strong>Google OAuth Token:</strong> A temporary access token issued by Google that allows the extension to interact with the YouTube API on your behalf. Stored locally in your browser using AES-256 encryption and never sent to our servers.</li>
+      <li><strong>Language Preference:</strong> Stored locally in your browser to remember your selected language (English or Spanish).</li>
+      <li><strong>Feedback Email (optional):</strong> If you choose to send feedback, your email address and message are sent via EmailJS to the developer. We do not store this data.</li>
+    </ul>
+
+    <h2>3. Data We Do NOT Collect</h2>
+    <ul>
+      <li>We do not collect your name, password, or any other personal information.</li>
+      <li>We do not read, store, or process the content of your YouTube videos.</li>
+      <li>We do not track your browsing history or activity outside of the extension.</li>
+      <li>We do not sell or share your data with any third parties for advertising or marketing purposes.</li>
+      <li>We do not store comments or scan results on any server — all processing happens locally in your browser.</li>
+    </ul>
+
+    <h2>4. How We Use Your Data</h2>
+    <ul>
+      <li><strong>YouTube Channel ID:</strong> Used solely to verify whether your account has an active subscription in our database.</li>
+      <li><strong>OAuth Token:</strong> Used solely to make authorized requests to the YouTube Data API (list videos, fetch comments, delete comments) on your behalf.</li>
+      <li><strong>Subscription Status:</strong> Stored in Firebase Firestore to determine whether you have access to premium features.</li>
+    </ul>
+
+    <h2>5. Third-Party Services</h2>
+    <p>CommentSweep uses the following third-party services:</p>
+    <ul>
+      <li><strong>Google YouTube Data API v3:</strong> To access and manage comments on your YouTube channel. Subject to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+      <li><strong>Firebase Firestore (Google):</strong> To store subscription status. Subject to <a href="https://firebase.google.com/support/privacy" target="_blank">Firebase's Privacy Policy</a>.</li>
+      <li><strong>PayPal:</strong> To process subscription payments. Subject to <a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full" target="_blank">PayPal's Privacy Policy</a>. We do not store any payment or card information.</li>
+      <li><strong>EmailJS:</strong> To send feedback emails. Only used when you voluntarily submit feedback. Subject to <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank">EmailJS's Privacy Policy</a>.</li>
+    </ul>
+
+    <h2>6. Data Retention</h2>
+    <ul>
+      <li>Your OAuth token is stored locally in your browser and automatically expires after 1 hour. It is deleted when you sign out.</li>
+      <li>Your subscription record in Firebase is retained while your subscription is active. You may request deletion by contacting us.</li>
+      <li>Scan results are stored temporarily in your browser's local storage and are cleared after use.</li>
+    </ul>
+
+    <h2>7. Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access the data we hold about you.</li>
+      <li>Request deletion of your data from our systems.</li>
+      <li>Revoke the extension's access to your YouTube account at any time via <a href="https://myaccount.google.com/permissions" target="_blank">Google Account Permissions</a>.</li>
+    </ul>
+
+    <h2>8. Security</h2>
+    <p>
+      Your Google OAuth token is encrypted using AES-256-GCM before being stored locally in your browser.
+      All communication with external APIs uses HTTPS. We do not have access to your Google password
+      or any payment information.
+    </p>
+
+    <h2>9. Children's Privacy</h2>
+    <p>
+      CommentSweep is not directed at children under the age of 13.
+      We do not knowingly collect personal information from children.
+    </p>
+
+    <h2>10. Changes to This Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. Changes will be posted on this page
+      with an updated date. Continued use of the extension after changes constitutes acceptance
+      of the updated policy.
+    </p>
+
+    <h2>11. Contact</h2>
+    <p>
+      If you have any questions about this Privacy Policy or want to request data deletion,
+      please contact us at:
+      <a href="mailto:asuntosdcarlos@gmail.com">asuntosdcarlos@gmail.com</a>
+    </p>
+
+    <div class="footer">
+      <p>© 2026 CommentSweep. All rights reserved.</p>
+    </div>
+
+  </div>
+</body>
+</html>
