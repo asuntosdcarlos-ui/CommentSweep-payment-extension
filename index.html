@@ -1,156 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CommentSweep Premium</title>
-    <style>
-        :root {
-            --bg-body: #0d1117;
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --accent-red: #da3633;
-            --border-color: #30363d;
-        }
-        body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
-        .container {
-            max-width: 500px;
-            padding: 40px;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            background: #161b22;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        h1 { font-size: 2.2rem; margin-bottom: 10px; }
-        .red { color: var(--accent-red); }
-        .price-tag {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 20px 0;
-            color: var(--text-main);
-        }
-        .price-tag span { color: var(--text-muted); font-size: 1rem; font-weight: normal; }
-        p { color: var(--text-muted); margin-bottom: 30px; font-size: 1rem; }
-        .features {
-            text-align: left;
-            margin-bottom: 40px;
-            list-style: none;
-            padding-left: 0;
-        }
-        .features li { margin-bottom: 12px; display: flex; align-items: center; }
-        .features li::before { content: "✓"; color: var(--accent-red); font-weight: bold; margin-right: 10px; }
-        #paypal-button-container-P-6HB8436276585313TNHXHSTY {
-            width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CommentSweep – YouTube Comment Cleaner</title>
+  <style>
+    :root {
+      --bg:     #0d1117;
+      --text:   #f0f6fc;
+      --muted:  #8b949e;
+      --red:    #da3633;
+      --border: #30363d;
+      --card:   #161b22;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+    }
+    .nav-logo { font-size: 1.2rem; font-weight: 700; }
+    .nav-logo span { color: var(--red); }
+    nav a { color: var(--muted); text-decoration: none; font-size: 14px; transition: color .15s; }
+    nav a:hover { color: var(--text); }
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+    .hero h1 span { color: var(--red); }
+    .hero p { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background .15s;
+    }
+    .btn-primary:hover { background: #b91c1c; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+    .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .feature-card p { color: var(--muted); font-size: 0.9rem; }
+    .how { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 60px 20px; text-align: center; }
+    .how h2 { font-size: 1.8rem; margin-bottom: 40px; }
+    .steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 900px; margin: 0 auto; }
+    .step { max-width: 180px; }
+    .step-num { width: 40px; height: 40px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; margin: 0 auto 12px; }
+    .step p { color: var(--muted); font-size: 0.9rem; }
+    .data { max-width: 700px; margin: 0 auto; padding: 60px 20px; }
+    .data h2 { font-size: 1.6rem; margin-bottom: 20px; }
+    .data p { color: var(--muted); margin-bottom: 12px; font-size: 0.95rem; }
+    .data ul { color: var(--muted); padding-left: 20px; font-size: 0.95rem; margin-bottom: 16px; }
+    .data ul li { margin-bottom: 8px; }
+    .pricing { text-align: center; padding: 60px 20px; background: var(--card); border-top: 1px solid var(--border); }
+    .pricing h2 { font-size: 1.8rem; margin-bottom: 10px; }
+    .price { font-size: 2.5rem; font-weight: 700; color: var(--red); margin: 20px 0 8px; }
+    .price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+    .pricing p { color: var(--muted); margin-bottom: 24px; }
+    footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+    footer a { color: var(--muted); text-decoration: none; margin: 0 10px; }
+    footer a:hover { color: var(--text); }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Comment<span class="red">Sweep</span></h1>
-        <p>Automate your YouTube moderation and reclaim your time.</p>
-        <div class="price-tag">$5 <span>/ month</span></div>
-        <ul class="features">
-            <li>Bulk comment deletion based on keywords.</li>
-            <li>Scan all your videos automatically.</li>
-            <li>Eliminate spam and toxicity instantly.</li>
-            <li>Continuous updates and priority support.</li>
-        </ul>
-        <div id="paypal-button-container-P-6HB8436276585313TNHXHSTY"></div>
+
+  <nav>
+    <div class="nav-logo">Comment<span>Sweep</span></div>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Clean your YouTube channel<br/><span>in seconds</span></h1>
+    <p>CommentSweep is a Chrome extension that helps YouTube creators find and bulk-delete unwanted comments using keyword filters. No more manual deletion — scan all your videos at once.</p>
+    <a href="https://chromewebstore.google.com/detail/commentsweep-%E2%80%93-youtube-co/lklldodkiaipnclbmpkcndobellfhmae" class="btn-primary" target="_blank">Add to Chrome</a>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>Keyword Filter</h3>
+      <p>Type any word or phrase. CommentSweep scans all your videos and finds every comment containing it — spam, bots, hate speech, off-topic comments.</p>
     </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Background Processing</h3>
+      <p>Scanning and deletion run in the background. Close the extension and get a system notification when it's done. No need to wait.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>Secure & Private</h3>
+      <p>We only access the comments on your own YouTube channel. No data is stored on our servers. Authentication uses Google's official OAuth system.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3>English & Spanish</h3>
+      <p>Full interface available in both English and Spanish. Switch languages instantly from the extension header.</p>
+    </div>
+  </section>
 
-    <!-- Firebase SDK (module) — writes subscription to Firestore on payment -->
-    <script type="module">
-      import { initializeApp }               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import { getFirestore, doc, setDoc }  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  <section class="how">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>Connect your Google account with YouTube channel access</p></div>
+      <div class="step"><div class="step-num">2</div><p>Subscribe for $5/month to unlock all features</p></div>
+      <div class="step"><div class="step-num">3</div><p>Type the keywords you want to remove from comments</p></div>
+      <div class="step"><div class="step-num">4</div><p>Choose which videos to scan — all or specific ones</p></div>
+      <div class="step"><div class="step-num">5</div><p>Review results and delete everything in one click</p></div>
+    </div>
+  </section>
 
-      const firebaseConfig = {
-        apiKey:            "AIzaSyA3nLIZKjOwGUL8MTBl5SZAUfd0q1AeO9o",
-        authDomain:        "commentsweep-9b43d.firebaseapp.com",
-        projectId:         "commentsweep-9b43d",
-        storageBucket:     "commentsweep-9b43d.firebasestorage.app",
-        messagingSenderId: "344472417970",
-        appId:             "1:344472417970:web:07253bdf09d589b6c07bab",
-      };
+  <section class="data">
+    <h2>How we use your data</h2>
+    <p>CommentSweep uses Google's YouTube Data API to perform actions on behalf of the authenticated YouTube channel owner. Here is exactly what we access and why:</p>
+    <ul>
+      <li><strong>YouTube channel info</strong> — to identify your channel and use it as a unique account identifier.</li>
+      <li><strong>Your videos list</strong> — to scan comments across all or selected videos.</li>
+      <li><strong>Comments on your videos</strong> — to find and display comments matching your keywords.</li>
+      <li><strong>Delete comments</strong> — only the comments you explicitly select and confirm for deletion.</li>
+    </ul>
+    <p>We do <strong>not</strong> store your comments, videos, or personal data on any external server. All processing happens locally in your browser. Your YouTube channel ID is only used to verify your subscription status in our database.</p>
+    <p>For full details, read our <a href="/privacy-policy.html" style="color:var(--red)">Privacy Policy</a>.</p>
+  </section>
 
-      const app = initializeApp(firebaseConfig);
-      const db  = getFirestore(app);
+  <section class="pricing">
+    <h2>Simple pricing</h2>
+    <div class="price">$5 <span>/ month</span></div>
+    <p>Unlimited comment scanning and deletion. Cancel anytime.</p>
+    <a href="https://chromewebstore.google.com/detail/commentsweep-%E2%80%93-youtube-co/lklldodkiaipnclbmpkcndobellfhmae" class="btn-primary" target="_blank">Subscribe — $5/month</a>
+  </section>
 
-      // Read user_id from URL — the extension passes this automatically
-      const userId = new URLSearchParams(window.location.search).get("user_id") || "";
+  <footer>
+    <p>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:asuntosdcarlos@gmail.com">Contact</a>
+      <a href="https://chromewebstore.google.com/detail/commentsweep-%E2%80%93-youtube-co/lklldodkiaipnclbmpkcndobellfhmae" target="_blank">Chrome Web Store</a>
+    </p>
+    <p style="margin-top:12px">© 2026 CommentSweep. All rights reserved.</p>
+  </footer>
 
-      // Expose globally so the PayPal script (non-module) can call it
-      window._writeSubscription = async function(subscriptionId) {
-        if (!userId) return;
-        try {
-          await setDoc(doc(db, "subscriptions", userId), {
-            active:         true,
-            status:         "ACTIVE",
-            subscriptionId: subscriptionId || "",
-            planId:         "P-6HB8436276585313TNHXHSTY",
-            userId:         userId,
-            createdAt:      Date.now(),
-          });
-        } catch (e) {
-          console.error("Firebase write error:", e);
-        }
-      };
-    </script>
-
-    <script src="https://www.paypal.com/sdk/js?client-id=Aemp6eLZ0j8fhEtMOsWIxNxCZS3cDK-FmkiBRBGsX5-Y82iTL9ER3mdEN2iX99FrKdp51oS259z-QpcM&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
-    <script>
-      var userId = new URLSearchParams(window.location.search).get("user_id") || "";
-
-      paypal.Buttons({
-          style: { shape: 'rect', color: 'gold', layout: 'vertical', label: 'subscribe' },
-
-          createSubscription: function(data, actions) {
-            return actions.subscription.create({
-              plan_id:   'P-6HB8436276585313TNHXHSTY',
-              custom_id: userId,   // ← ties the PayPal payment to this user's channel ID
-            });
-          },
-
-          onApprove: function(data, actions) {
-            var subData = {
-              subscriptionId: data.subscriptionID,
-              planId:         'P-6HB8436276585313TNHXHSTY',
-              userId:         userId,
-              active:         true,
-              date:           Date.now(),
-            };
-
-            // 1. Write to Firebase Firestore (primary — extension reads from here)
-            if (typeof window._writeSubscription === 'function') {
-              window._writeSubscription(data.subscriptionID);
-            }
-
-            // 2. Save to localStorage (content script polls this as backup)
-            localStorage.setItem('commentsweep_subscription', JSON.stringify(subData));
-
-            // 3. PostMessage (content script catches this instantly)
-            window.postMessage({ type: 'COMMENTSWEEP_SUBSCRIBED', payload: subData }, '*');
-
-            alert('Subscription successful! Thank you for supporting CommentSweep.\n\nYou can close this tab and return to the extension — it will unlock automatically.');
-          }
-      }).render('#paypal-button-container-P-6HB8436276585313TNHXHSTY');
-    </script>
-    <div style="text-align:center;margin-top:30px;padding:20px">
-  <a href="privacy-policy.html" 
-     style="color:#8b949e;font-size:13px;text-decoration:none">
-    Privacy Policy
-  </a>
-</div>
 </body>
 </html>
